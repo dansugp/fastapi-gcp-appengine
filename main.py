@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-# from database import get_db_connection
+from database import get_db_connection
 from dotenv import load_dotenv
 import os 
 
@@ -11,12 +11,12 @@ app = FastAPI()
 def read_root():
     return {"Hello": "Este es otro servicio"}
 
-# @app.get("/students")
-# def read_students():
-#     db = get_db_connection()
-#     cursor = db.cursor()
-#     cursor.execute("SELECT * FROM students")
-#     students = cursor.fetchall()
-#     cursor.close()
-#     db.close()
-#     return {"students": students}
+@app.get("/students")
+def read_students():
+    db = get_db_connection()
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM students")
+    students = cursor.fetchall()
+    cursor.close()
+    db.close()
+    return {"students": students}
